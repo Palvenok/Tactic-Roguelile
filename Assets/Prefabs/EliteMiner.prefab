@@ -164,8 +164,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c85b6271cf68fe42ac90e6422279cf7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnMoveComplite:
+  OnActionComplete:
+    m_PersistentCalls:
+      m_Calls: []
+  OnDeath:
     m_PersistentCalls:
       m_Calls: []
   _health: 15
-  _damage: 9
+  _damage: 5

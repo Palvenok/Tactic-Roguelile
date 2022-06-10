@@ -3,7 +3,7 @@ using UnityEngine.Events;
 
 public abstract class Unit : MonoBehaviour
 {
-    [HideInInspector] public UnityEvent OnMoveComplite;
+    [HideInInspector] public UnityEvent OnActionComplete;
     [HideInInspector] public UnityEvent<Unit> OnDeath;
 
     [SerializeField] private float _health = 15;
@@ -21,7 +21,7 @@ public abstract class Unit : MonoBehaviour
 
     private void OnDestroy()
     {
-        OnMoveComplite.RemoveAllListeners();
+        OnActionComplete.RemoveAllListeners();
         OnDeath.RemoveAllListeners();
     }
 }

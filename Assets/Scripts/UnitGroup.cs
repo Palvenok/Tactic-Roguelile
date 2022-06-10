@@ -81,6 +81,7 @@ public class UnitGroup : MonoBehaviour
     {
         for (int i = 0; i < _units.Count; i++)
         {
+            if ((Vector2)_units[i].transform.position == _unitsPosition[i]) continue;
             _units[i].MoveToPoint(_unitsPosition[i]);
         }
 

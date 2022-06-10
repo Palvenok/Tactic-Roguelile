@@ -6,11 +6,15 @@ public class InputHandler : MonoBehaviour
 {
     [SerializeField] private Button attackButton;
     [SerializeField] private Button skipButton;
+    [SerializeField] private Button leftArrow;
+    [SerializeField] private Button rightArrow;
 
     public UnityEvent<KeyCode> OnKeyDown;
 
     private void Start()
     {
+        leftArrow.onClick.AddListener(() => { OnKeyDown?.Invoke(Keys.leftKey); });
+        rightArrow.onClick.AddListener(() => { OnKeyDown?.Invoke(Keys.rightKey); });
         attackButton.onClick.AddListener(() => { OnKeyDown?.Invoke(Keys.attackKey); });
         skipButton.onClick.AddListener(() => { OnKeyDown?.Invoke(Keys.skipKey); });
     }

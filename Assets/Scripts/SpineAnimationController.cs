@@ -5,11 +5,13 @@ public class SpineAnimationController : MonoBehaviour
 {
     [SerializeField] private AnimationAsset[] animationAssets;
 
-    private SkeletonAnimation skeletonAnimation;
+    private SkeletonAnimation _skeletonAnimation;
+
+    public SkeletonAnimation SkeletonAnimation => _skeletonAnimation;
 
     private void Awake()
     {
-        skeletonAnimation = GetComponent<SkeletonAnimation>();
+        _skeletonAnimation = GetComponent<SkeletonAnimation>();
     }
 
     public void SetAnimation(AnimationState state, bool loop, float timeScale = 1f)
@@ -18,7 +20,7 @@ public class SpineAnimationController : MonoBehaviour
         {
             if (animationAsset.State == state)
             {
-                skeletonAnimation.state.SetAnimation(0, animationAsset.Asset, loop).TimeScale = timeScale;
+                _skeletonAnimation.state.SetAnimation(0, animationAsset.Asset, loop).TimeScale = timeScale;
                 return;
             }
         }
