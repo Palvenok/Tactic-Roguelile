@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour
             else battleSystem.Index--;
         }
 
-        if (key == Keys.attackKey) battleSystem.NextState(battleSystem.CurrentState);
+        if (key == Keys.attackKey) battleSystem.NextState(battleSystem.CurrentState, 0);
         if (key == Keys.skipKey) battleSystem.SkipStage();
     }
 }

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BattleController : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class BattleController : MonoBehaviour
     [Space]
     [SerializeField] private UIController uiController;
 
+    private bool _isBattleActive;
     private bool _isPlayerTurn;
 
     private void Start()
@@ -15,21 +17,27 @@ public class BattleController : MonoBehaviour
         battleSystem.OnBattleStart.AddListener(OnBattleStart);
         battleSystem.OnBattleEnd.AddListener(OnBattleEnd);
         battleSystem.OnRoundEnd.AddListener(OnRoundEnd);
+        battleSystem.OnBattleSkip.AddListener(OnBattleSkip);
 
         int rand = Random.Range(0, 2);
         _isPlayerTurn = rand == 0;
-
-        StartGame();
     }
 
     public void StartGame()
     {
+        _isBattleActive = true;
         NextBattle();
+    }
+
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     private void NextBattle()
     {
-        Debug.Log(_isPlayerTurn);
+        if (!_isBattleActive) return;
+
         if (_isPlayerTurn)
         {
             battleSystem.Initialize(GroupType.Player);
@@ -38,7 +46,7 @@ public class BattleController : MonoBehaviour
         else
         { 
             battleSystem.Initialize(GroupType.AI);
-            aiController.Initialize(battleSystem.PlauerGroupCount, battleSystem.AiGroupCount);
+            aiController.Initialize(battleSystem.PlayerGroupCount, battleSystem.AiGroupGroupCount);
         }
     }
 
@@ -53,8 +61,14 @@ public class BattleController : MonoBehaviour
         NextBattle();
     }
 
+    private void OnBattleSkip()
+    {
+        Debug.Log("Battle Skiped");
+    }
+
     private void OnRoundEnd(GroupType groupType)
     {
+        _isBattleActive = false;
         playerController.IsActive = false;
     }
 }

@@ -7,6 +7,7 @@ public class BattleSystem : MonoBehaviour
 {
     [HideInInspector] public UnityEvent OnBattleStart;
     [HideInInspector] public UnityEvent OnBattleEnd;
+    [HideInInspector] public UnityEvent OnBattleSkip;
     [HideInInspector] public UnityEvent<GroupType> OnRoundEnd;
 
     [SerializeField] private UnitGroup playerGroup;
@@ -32,13 +33,15 @@ public class BattleSystem : MonoBehaviour
     public BattleState CurrentState { get => _currentState; set => _currentState = value; }
     public int Index { get => _index; set => _index = value; }
 
-    public int PlauerGroupCount => playerGroup.UnitsCount;
-    public int AiGroupCount => aiGroup.UnitsCount;
+    public int PlayerGroupCount { get; private set; }
+    public int AiGroupGroupCount { get; private set; }
 
     private void Start()
     {
         playerGroup.OnGroupDead.AddListener(() => { OnRoundEnd?.Invoke(GroupType.AI); });
+        playerGroup.OnGroupUpdate.AddListener(v => { PlayerGroupCount = v; });
         aiGroup.OnGroupDead.AddListener(() => { OnRoundEnd?.Invoke(GroupType.Player); });
+        aiGroup.OnGroupUpdate.AddListener(v => { AiGroupGroupCount = v; });
     }
 
     public void Initialize(GroupType groupType)
@@ -70,6 +73,7 @@ public class BattleSystem : MonoBehaviour
 
     public void Disable()
     {
+        _index = 0;
         _isInitialized  = false;
         _indicator.SetActive(false);
         OnBattleEnd?.Invoke();
@@ -116,21 +120,21 @@ public class BattleSystem : MonoBehaviour
             Disable();
         }
 
-        if (UnitsSinc()) NextState(_peviousState);
+        if (UnitsSinc()) NextState(_peviousState, 0);
     }
 
-    public BattleState NextState(BattleState state)
+    public void NextState(BattleState state, int index)
     {
-        _index = 0;
+        _index = index;
         state++;
         _currentState = state;
-        return _currentState;
     }
 
     public void SkipStage()
     {
         _indicator.SetActive(false);
         _currentState = BattleState.Delay;
+        OnBattleSkip?.Invoke();
         Disable();
     }
 
@@ -213,6 +217,8 @@ public class BattleSystem : MonoBehaviour
     {
         OnBattleStart.RemoveAllListeners();
         OnBattleEnd.RemoveAllListeners();
+        OnBattleSkip.RemoveAllListeners();
+        OnRoundEnd.RemoveAllListeners();
     }
 }
 

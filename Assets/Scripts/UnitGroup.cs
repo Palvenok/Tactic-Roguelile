@@ -5,6 +5,7 @@ using UnityEngine.Events;
 public class UnitGroup : MonoBehaviour
 {
     [HideInInspector] public UnityEvent OnGroupDead;
+    [HideInInspector] public UnityEvent<int> OnGroupUpdate;
 
     [SerializeField] private GroupType groupType = GroupType.Unknown;
     [SerializeField] private SpawnSettings spawnSettings = SpawnSettings.None;
@@ -59,6 +60,8 @@ public class UnitGroup : MonoBehaviour
             _units[i].transform.localPosition = _xOffset += Vector2.left * xOffset * .1f;
             _unitsPosition[i] = _units[i].transform.position;
         }
+
+        UpdateGroup();
     }
 
     public Unit GetUnit(int index)
@@ -85,6 +88,7 @@ public class UnitGroup : MonoBehaviour
             _units[i].MoveToPoint(_unitsPosition[i]);
         }
 
+        OnGroupUpdate?.Invoke(UnitsCount);
         if (_units.Count == 0) OnGroupDead?.Invoke();
     }
 
@@ -96,6 +100,7 @@ public class UnitGroup : MonoBehaviour
     private void OnDestroy()
     {
         OnGroupDead.RemoveAllListeners();
+        OnGroupUpdate.RemoveAllListeners();
     }
 }
 

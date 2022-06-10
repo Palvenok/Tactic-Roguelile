@@ -12,24 +12,32 @@ public class AiController : MonoBehaviour
     {
         _plauerGroupCount = plauerGroupCount;
         _groupCount = aiGroupCount;
+
+        Debug.Log(_plauerGroupCount + " / " + _groupCount);
         StartCoroutine(Process());
     }
 
     private IEnumerator Process()
     {
+        var rand = Random.Range(0, 100);
         yield return new WaitForSeconds(Random.Range(.5f, 1.5f));
-        if (Random.Range(0, 10) < 2)
+        if (rand < 2)
         {
             battleSystem.SkipStage();
             yield break;
         }
 
-        battleSystem.Index = Random.Range(0, _groupCount);
-        battleSystem.NextState(battleSystem.CurrentState);
+
+        Debug.Log(_plauerGroupCount + " / " + _groupCount);
+
+        rand = Random.Range(0, _groupCount);
+        battleSystem.Index = rand;
+        battleSystem.NextState(battleSystem.CurrentState, battleSystem.Index);
 
         yield return new WaitForSeconds(Random.Range(.5f, 1.5f));
 
-        battleSystem.Index = Random.Range(0, _plauerGroupCount);
-        battleSystem.NextState(battleSystem.CurrentState);        
+        rand = Random.Range(0, _plauerGroupCount);
+        battleSystem.Index = rand;
+        battleSystem.NextState(battleSystem.CurrentState, battleSystem.Index);        
     }
 }
