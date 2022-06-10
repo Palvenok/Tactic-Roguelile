@@ -12,13 +12,17 @@ public class SpineAnimationController : MonoBehaviour
         skeletonAnimation = GetComponent<SkeletonAnimation>();
     }
 
-    public void SetAnimation(AnimationState state, bool loop)
+    public void SetAnimation(AnimationState state, bool loop, float timeScale = 1f)
     {
         foreach (var animationAsset in animationAssets)
         {
             if (animationAsset.State == state)
-                skeletonAnimation.state.SetAnimation(0, animationAsset.Asset, loop);
+            {
+                skeletonAnimation.state.SetAnimation(0, animationAsset.Asset, loop).TimeScale = timeScale;
+                return;
+            }
         }
+        Debug.Log("Unassiggned animation");
     }
 
     [System.Serializable]

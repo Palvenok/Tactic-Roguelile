@@ -152,5 +152,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf13bebd071515746a4fd67191a3caef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnMoveComplite:
+    m_PersistentCalls:
+      m_Calls: []
   _health: 10
   _damage: 5

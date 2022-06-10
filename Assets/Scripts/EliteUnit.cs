@@ -1,3 +1,4 @@
+using DG.Tweening;
 using UnityEngine;
 
 public class EliteUnit : Unit
@@ -22,7 +23,22 @@ public class EliteUnit : Unit
 
     public override void TakeDamage(float damage)
     {
-        _animationController.SetAnimation(AnimationState.Damage, false);
         Health -= damage;
+        _animationController.SetAnimation(AnimationState.Damage, false);
+        if (Health <= 0)
+        {
+            OnDeath?.Invoke(this);
+            Destroy(gameObject);
+        }
+    }
+
+    public override void MoveToPoint(Vector2 point)
+    {
+        _animationController.SetAnimation(AnimationState.Pull, false, .3f);
+        transform.DOMove(point, 1).OnComplete(() =>
+        {
+            _animationController.SetAnimation(AnimationState.Idle, true);
+            OnMoveComplite?.Invoke();
+        });
     }
 }

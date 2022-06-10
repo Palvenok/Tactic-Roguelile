@@ -150,7 +150,7 @@ MonoBehaviour:
     State: 2
   - Asset: {fileID: 11400000, guid: f12bc78bd3ad73240a56c57e8a85e1f9, type: 2}
     State: 3
-  - Asset: {fileID: 11400000, guid: 533a43be840321c4a9bb370355dd4dcb, type: 2}
+  - Asset: {fileID: 11400000, guid: 405ab651d29ee634b851b3a2e5928770, type: 2}
     State: 4
 --- !u!114 &6721894226851053706
 MonoBehaviour:
@@ -164,5 +164,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c85b6271cf68fe42ac90e6422279cf7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnMoveComplite:
+    m_PersistentCalls:
+      m_Calls: []
   _health: 15
   _damage: 9
