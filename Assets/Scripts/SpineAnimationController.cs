@@ -1,7 +1,7 @@
 using UnityEngine;
 using Spine.Unity;
 
-public class AnimationController : MonoBehaviour
+public class SpineAnimationController : MonoBehaviour
 {
     [SerializeField] private AnimationAsset[] animationAssets;
 

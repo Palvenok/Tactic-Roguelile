@@ -2,12 +2,13 @@ using UnityEngine;
 
 public class BattleSystem : MonoBehaviour
 {
-    [SerializeField] private UnitGroup leftGroup;
-    [SerializeField] private UnitGroup rightGroup;
+    [SerializeField] private UnitGroup playerGroup;
+    [SerializeField] private UnitGroup aiGroup;
+    [SerializeField] private bool isPlayerTurn;
 
-    [ContextMenu("Fight")]
-    public void Fight()
+
+    public void Fight(int playerUnitId, int aiUnitId)
     {
-        leftGroup.GetUnit(0).Attack(rightGroup.GetUnit(0));
+        playerGroup.GetUnit(0).Attack(aiGroup.GetUnit(0));
     }
 }

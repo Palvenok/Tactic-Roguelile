@@ -2,12 +2,12 @@ using UnityEngine;
 
 public class EliteUnit : Unit
 {
-    private AnimationController _animationController;
+    private SpineAnimationController _animationController;
     private AnimationState _currentState = AnimationState.Idle;
 
     private void Awake()
     {
-        _animationController = GetComponent<AnimationController>();
+        _animationController = GetComponent<SpineAnimationController>();
     }
 
     private void Start()

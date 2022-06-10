@@ -10,6 +10,7 @@ public class UnitGroup : MonoBehaviour
     [SerializeField, Min(0)] private float xOffset = 10;
 
     private Unit[] _units;
+    private Vector2[] _unitsPosition;
     private Vector2 _xOffset;
 
     public int UnitsCount => _units.Length;
@@ -43,10 +44,13 @@ public class UnitGroup : MonoBehaviour
     public void SpawnUnitsFromArray(Unit[] units)
     {
         _units = new Unit[units.Length];
+        _unitsPosition = new Vector2[units.Length];
+
         for (int i = 0; i < units.Length; i++)
         {
             _units[i] = Instantiate(units[i], transform);
-            _units[i].transform.localPosition = _xOffset += Vector2.left * xOffset * .1f;
+            _units[i].ID = i;
+            _unitsPosition[i] = _units[i].transform.localPosition = _xOffset += Vector2.left * xOffset * .1f;
         }
     }
 

@@ -501,8 +501,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35bf7c3953e43cb4aadf31e9dd1cda1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leftGroup: {fileID: 1683845691}
-  rightGroup: {fileID: 1547258650}
+  playerGroup: {fileID: 1683845691}
+  aiGroup: {fileID: 1547258650}
+  isPlayerTurn: 0
 --- !u!4 &1508056700
 Transform:
   m_ObjectHideFlags: 0
@@ -530,7 +531,7 @@ GameObject:
   - component: {fileID: 1547258649}
   - component: {fileID: 1547258650}
   m_Layer: 0
-  m_Name: RightUnitGroup
+  m_Name: AiUnitGroup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -581,7 +582,7 @@ GameObject:
   - component: {fileID: 1683845692}
   - component: {fileID: 1683845691}
   m_Layer: 0
-  m_Name: LeftUnitGroup
+  m_Name: PlayerUnitGroup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -939,15 +940,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3188841237844161855, guid: 41b861c9565840146b4769aacc608c3f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.6886704
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3188841237844161855, guid: 41b861c9565840146b4769aacc608c3f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.113234
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3188841237844161855, guid: 41b861c9565840146b4769aacc608c3f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -11.975855
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3188841237844161855, guid: 41b861c9565840146b4769aacc608c3f, type: 3}
       propertyPath: m_LocalRotation.w
@@ -976,18 +977,6 @@ PrefabInstance:
     - target: {fileID: 3188841237844161855, guid: 41b861c9565840146b4769aacc608c3f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3501499883854956475, guid: 41b861c9565840146b4769aacc608c3f, type: 3}
-      propertyPath: m_SortingOrder
-      value: -3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5958572890194823622, guid: 41b861c9565840146b4769aacc608c3f, type: 3}
-      propertyPath: m_SortingOrder
-      value: -2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6413930913201995280, guid: 41b861c9565840146b4769aacc608c3f, type: 3}
-      propertyPath: m_SortingOrder
-      value: -1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 41b861c9565840146b4769aacc608c3f, type: 3}
