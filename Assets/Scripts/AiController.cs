@@ -27,17 +27,17 @@ public class AiController : MonoBehaviour
             yield break;
         }
 
-
-        Debug.Log(_plauerGroupCount + " / " + _groupCount);
-
         rand = Random.Range(0, _groupCount);
         battleSystem.Index = rand;
-        battleSystem.NextState(battleSystem.CurrentState, battleSystem.Index);
 
         yield return new WaitForSeconds(Random.Range(.5f, 1.5f));
+        battleSystem.NextState(battleSystem.CurrentState, rand);
 
+        yield return new WaitForSeconds(Random.Range(.5f, 1.5f));
         rand = Random.Range(0, _plauerGroupCount);
         battleSystem.Index = rand;
-        battleSystem.NextState(battleSystem.CurrentState, battleSystem.Index);        
+
+        yield return new WaitForSeconds(Random.Range(.5f, 1.5f));
+        battleSystem.NextState(battleSystem.CurrentState, rand);        
     }
 }

@@ -27,6 +27,10 @@ public class BattleController : MonoBehaviour
     {
         _isBattleActive = true;
         NextBattle();
+
+        var type = _isPlayerTurn ? GroupType.Player : GroupType.AI;
+        uiController.ChangeBattleUi(type, true);
+        uiController.ChangeLog("Attack: " + type);
     }
 
     public void RestartGame()
@@ -53,12 +57,20 @@ public class BattleController : MonoBehaviour
     private void OnBattleStart()
     {
         playerController.IsActive = false;
+        uiController.ChangeBattleUi(GroupType.Unknown, true);
+        uiController.ChangeLog("Battle!");
     }
 
     private void OnBattleEnd()
     {
+        if (!_isBattleActive) return;
+
         _isPlayerTurn = !_isPlayerTurn;
         NextBattle();
+
+        var type = _isPlayerTurn ? GroupType.Player : GroupType.AI;
+        uiController.ChangeBattleUi(type, true);
+        uiController.ChangeLog("Attack: " + type);
     }
 
     private void OnBattleSkip()
@@ -70,5 +82,8 @@ public class BattleController : MonoBehaviour
     {
         _isBattleActive = false;
         playerController.IsActive = false;
+
+        uiController.ChangeBattleUi(GroupType.Unknown, false);
+        uiController.ChangeLog("Win: " + groupType + "!");
     }
 }
