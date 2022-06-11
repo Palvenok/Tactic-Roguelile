@@ -132,10 +132,9 @@ public class BattleSystem : MonoBehaviour
 
     public void SkipStage()
     {
-        _indicator.SetActive(false);
         _currentState = BattleState.Delay;
-        OnBattleSkip?.Invoke();
         Disable();
+        OnBattleSkip?.Invoke();
     }
 
     private bool UnitsSinc()

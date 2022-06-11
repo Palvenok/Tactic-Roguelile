@@ -14,6 +14,12 @@ public class UIController : MonoBehaviour
 
     private void Start()
     {
+
+#if PLATFORM_ANDROID || UNITY_ANDROID
+        _uiEnabled = true; 
+        _tutorialEnabled = false;
+#endif
+
         gameUi.SetActive(_uiEnabled);
         tutorialPanel.SetActive(_tutorialEnabled);
     }

@@ -65,6 +65,7 @@ public class BattleController : MonoBehaviour
     {
         if (!_isBattleActive) return;
 
+        playerController.IsActive = false;
         _isPlayerTurn = !_isPlayerTurn;
         NextBattle();
 
